@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="title" content="Anatomy-CoT: Teaching MLLMs to Reason in Radiology - Shengzhi Wang, Kai WU, Lei Yang, et al.">
+  <meta name="description" content="We introduce Anatomy-CoT, a multi-step reasoning framework that follows real-world radiology pedagogical practices and incorporates visual grounding to enhance interpretability for radiologists.">
+  <meta name="keywords" content="Radiology, Multi-modal LLM, MLLM, Chain-of-Thought, CoT, Visual Grounding, Instruction Tuning, Reinforcement Learning">
+  <meta name="author" content="Shengzhi Wang, Kai WU, Lei Yang, Yiwen Ye, Zihan Wang, Yuhang Wu, Mingliang Xiong, Wen Fang, Mingqing Liu, Mengyuan Xu, Hao Deng, Gang Li, Yanghaihua, Qingwen Liu">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Anatomy-CoT Project Page">
+  <meta property="og:title" content="Anatomy-CoT: Teaching MLLMs to Reason in Radiology">
+  <meta property="og:description" content="A multi-step reasoning framework that follows real-world radiology pedagogical practices and incorporates visual grounding to enhance interpretability for radiologists.">
+  <meta property="og:url" content="https://med-air.github.io/Anatomy-CoT/">
+  <meta property="og:image" content="https://med-air.github.io/Anatomy-CoT/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Anatomy-CoT - Research Preview">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anatomy-CoT: Teaching MLLMs to Reason in Radiology">
+  <meta name="twitter:description" content="A multi-step reasoning framework that follows real-world radiology pedagogical practices.">
+  <meta name="twitter:image" content="https://med-air.github.io/Anatomy-CoT/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="Anatomy-CoT - Research Preview">
+
+  <meta name="citation_title" content="Anatomy-CoT: Teaching MLLMs to Reason in Radiology">
+  <meta name="citation_author" content="Wang, Shengzhi">
+  <meta name="citation_author" content="WU, Kai">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_pdf_url" content="https://med-air.github.io/Anatomy-CoT/static/pdfs/paper.pdf">
+  
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>Anatomy-CoT: Teaching MLLMs to Reason in Radiology</title>
+  
+  <link rel="icon" type="image/x-icon" href="static/images/logo1.png">
+  <link rel="apple-touch-icon" href="static/images/logo1.png">
+  
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+</head>
+<body>
+
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <a href="#" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 1</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="#" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+        
+            <h1 class="title is-1 publication-title">
+              <img src="./static/images/logo.png" 
+                  style="vertical-align: middle; height: 1.5em; width: auto; margin-right: 0.15em;">
+              Anatomy-CoT: Teaching MLLMs to Reason in Radiology
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="#" target="_blank">Shengzhi Wang</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Kai WU</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Lei Yang</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Yiwen Ye</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Zihan Wang</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Yuhang Wu</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Mingliang Xiong</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Wen Fang</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Mingqing Liu</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Mengyuan Xu</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Hao Deng</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Gang Li</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Yanghaihua</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Qingwen Liu</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Tongji University & ByteDance</span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates co-first authors</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                
+                <span class="link-block">
+                  <a href="https://github.com/med-air/Anatomy-CoT" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-database"></i>
+                    </span>
+                    <span>Datasets</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-cubes"></i>
+                    </span>
+                    <span>Models</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+        <source src="static/videos/video_demo.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        A demonstration of the Anatomy-CoT framework in action, showcasing visually-grounded reasoning on a radiology image.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Chain-of-Thought (CoT) has shown promise in enabling multimodal large language models to solve complex problems. 
+          However, CoT suffers from an over-reliance on textual cues and struggles to adapt general reasoning capabilities to highly specialized domains such as radiology. 
+          Radiologists, in real clinical practice, develop their expertise through structured pedagogical training that demands not only accurate predictions but also a clear, transparent alignment between textual reasoning and the underlying visual evidence.
+          In this paper, we introduce Anatomy-CoT, a multi-step reasoning framework that follows real-world radiology pedagogical practices and incorporates visual grounding to enhance interpretability for radiologists.
+          Anatomy-CoT is built on two core principles: (1) it employs structured, anatomy-centric reasoning paths that organize the entire thought process in a pedagogically coherent manner, and (2) it enforces visual grounding by representing anatomical concepts in an interleaved format that directly links textual reasoning to corresponding image regions.
+          This approach not only bridges the modality gap but also ensures faithfulness to the visual evidence.
+          To enable MLLMs to adopt this framework, we construct a large-scale instruction-tuning dataset, Anatomy-CoT-200K, comprising over 200,000 examples. We further introduce GRPO-MR, a reinforcement learning algorithm that enhances structured reasoning by supervising both the accuracy of anatomical grounding and the coherence of the specialized reasoning process. This reduces reasoning-path ambiguity and substantially improves the model’s final performance.
+          Comprehensive evaluations show that Anatomy-CoT delivers transparent reasoning, achieves an 11.7% improvement over vanilla CoT, and generalizes robustly to out-of-domain radiology images.    
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-2 has-text-centered">
+        Approach
+      </h2>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+              <p>
+                Our approach is designed to systematically teach Multimodal Large Language Models (MLLMs) the <code>Anatomy-CoT</code> reasoning paradigm, transforming them into verifiable and transparent reasoners for radiology. This is achieved through a two-stage training strategy: (1) We first perform <strong>Interleaved CoT Supervised Fine-Tuning (SFT)</strong> on our custom-built <code>Anatomy-CoT-200k</code> dataset. This initial stage aligns the base model with our complex, interleaved reasoning format, teaching it to generate structured analyses (<code>&lt;think&gt;</code>) and reasoning steps (<code>&lt;rethink&gt;</code>) grounded in anatomical evidence. (2) We then apply <strong>GRPO-MR</strong>, our novel reinforcement learning algorithm, to refine the model's capabilities. This stage optimizes the policy using a composite reward signal that uniquely evaluates both the <strong>final answer accuracy</strong> and the <strong>structural integrity of the reasoning process</strong>, including the textual fidelity and visual grounding precision of its anatomical findings.
+              </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="approach-carousel" class="carousel results-carousel" style="overflow: hidden; margin-top: 2rem;">
+        
+        <div class="item">
+          <div class="has-text-centered">
+            <img src="static/images/Data_pipline_1.png" alt="Anatomy-CoT Pipeline" style="max-width: 90%; height: auto; display: inline-block;"/>
+            <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+               Illustration of the pipeline constructing the <code>Anatomy-CoT-200k</code> dataset.
+            </h2>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="has-text-centered">
+            <img src="static/images/framework_v1.png" alt="GRPO-MR Framework" style="max-width: 90%; height: auto; display: inline-block;"/>
+            <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+               The GRPO-MR training phase, which refines the policy using our composite reward signal.
+            </h2>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <h3 class="title is-3">Why Does Grounding Matter?</h3>
+
+    <div class="content has-text-justified">
+      <p>
+        Our ablation studies reveal that interleaving visual grounding is not just an auxiliary task, but a fundamental driver of reasoning quality. The resulting model exhibits distinct cognitive behaviors:
+      </p>
+      <ul>
+        <li>
+          <strong>Hyper-Efficient Learning:</strong> As shown in the left figure, <code>Anatomy-CoT</code> surpasses standard vanilla GRPO after just 10 iterations of reinforcement learning (RL), demonstrating significantly higher data efficiency and performance potential.
+        </li>
+        <li>
+          <strong>Sustained Visual Attention:</strong> The attention score analysis (right figure) confirms that generating explicit bounding boxes acts as a persistent anchor. It forces the model to maintain significantly higher attention on visual tokens throughout the generation process compared to vanilla GRPO.
+        </li>
+        <li>
+          <strong>Reduced Cognitive Drift:</strong> While vanilla GRPO rapidly lose focus on the image as the response grows, <code>Anatomy-CoT</code>'s attention decays at a much slower rate. This ensures that the final conclusion is derived from active visual verification rather than language priors.
+        </li>
+      </ul>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: 2rem;">
+      
+      <div class="column is-half has-text-centered">
+        <img src="./static/images/ab1_adapted.png" alt="RL Performance Comparison" style="width: 100%; object-fit: contain;">
+        <h2 class="subtitle is-6 has-text-centered" style="margin-top: 10px;">
+          <strong>Learning Efficiency:</strong> Anatomy-CoT vs. vanilla GRPO <br> under few-shot RL settings.
+        </h2>
+      </div>
+
+      <div class="column is-half has-text-centered">
+        <img src="./static/images/attention_score_v2.png" alt="Attention Score Analysis" style="width: 100%; object-fit: contain;">
+        <h2 class="subtitle is-6 has-text-centered" style="margin-top: 10px;">
+          <strong>Visual Focus:</strong> Average attention scores on image tokens <br> during the reasoning phase.
+        </h2>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
